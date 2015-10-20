@@ -1,5 +1,5 @@
 <?php
-
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,15 +10,17 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::post('login', 'Auth\AuthController@postLogin');
+Route::Get('logout', 'Auth\AuthController@getLogout');
 
-Route::get('/', function()
-{
-	return View::make('login');
+Route::get('clientes', function(){
+    $clientes = User::all();
+    return View::make('clients')->with('users', $clientes);
 });
-Route::get("home", function()
-           {
-               return View::make('home');
-           });
+
+Route::get('/', 'LoginController@index');
+
+Route::get("home", 'HomeController@index');
 
 Route::get('/charts', function()
 {
@@ -71,10 +73,6 @@ Route::get('/blank', function()
 	return View::make('blank');
 });
 
-Route::get('/login', function()
-{
-	return View::make('login');
-});
 
 Route::get('/documentation', function()
 {
