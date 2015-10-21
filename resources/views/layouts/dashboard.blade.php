@@ -5,14 +5,14 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
+            <div class="navbar-header dario">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('/home') }}">Operagestion</a>
+                <a class="navbar-brand" href="{{ url ('/home') }}"><img src="{{asset('assets/images/operagestion.png')}}"></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -26,12 +26,12 @@
                         {{ Auth::user()->name }}<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i></a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>Perfil</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Configuración</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="{{ url ('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ url ('logout') }}"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -57,8 +57,14 @@
                         <li {{ (Request::is('home') ? 'class="active"' : '') }}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                        <li {{ (Request::is('clientes') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('clientes') }}"><i class="fa fa-users fa-fw"></i> Clientes</a>
+                        <li >
+                            <a href="#"><i class="fa fa-users fa-fw"></i>Usuarios<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li {{ (Request::is('users') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('users') }}">Lista de usuarios</a>
+                                </li>
+                            </ul>
+                        
                             <!-- /.nav-second-level -->
                         </li>
                         <li {{ (Request::is('*tables') ? 'class="active"' : '') }}>

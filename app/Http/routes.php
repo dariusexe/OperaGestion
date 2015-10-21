@@ -1,5 +1,4 @@
 <?php
-use App\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,11 +11,9 @@ use App\User;
 */
 Route::post('login', 'Auth\AuthController@postLogin');
 Route::Get('logout', 'Auth\AuthController@getLogout');
-
-Route::get('clientes', function(){
-    $clientes = User::all();
-    return View::make('clients')->with('users', $clientes);
-});
+Route::get('users', 'UserController@index');
+Route::get('userCreate', 'UserController@create');
+Route::post('userCreate', 'UserController@store');
 
 Route::get('/', 'LoginController@index');
 

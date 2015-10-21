@@ -58,5 +58,15 @@
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+	$('#sure').on('show.bs.modal', function (event) {
+  	var button = $(event.relatedTarget) // Button that triggered the modal
+  	var recipient = button.data('whatever') // Extract info from data-* attributes
+  	// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  	// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+ 	 var modal = $(this)
+ 	 modal.find('.modal-body').text('Esta a ounto de borrar al usuario ' + recipient + '¿Está seguro?')
+})
+</script>
 </body>
 </html>

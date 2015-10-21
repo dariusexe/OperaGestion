@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <a href="#">
+                    <a href="{{url('users')}}">
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
