@@ -14,6 +14,7 @@ Route::Get('logout', 'Auth\AuthController@getLogout');
 Route::get('users', 'UserController@index');
 Route::get('userCreate', 'UserController@create');
 Route::post('userCreate', 'UserController@store');
+Route::get('userDelete/{email}', ['as' => 'delete', 'uses' => 'UserController@destroy']);
 
 Route::get('/', 'LoginController@index');
 

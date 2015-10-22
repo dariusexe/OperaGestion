@@ -26,6 +26,7 @@ $('#sure').on('show.bs.modal', function (event) {
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   modal.find('.modal-body').html('Esta a punto de borrar al usuario ' + recipient.bold() + ' ¿Está seguro?')
+  modal.find('.btn-danger').attr('href', "/userDelete/"+recipient)
 })
 </script>
 </body>

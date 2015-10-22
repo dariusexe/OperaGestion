@@ -65,7 +65,9 @@ class UserController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$user = User::findById($id);
+		return \View::make('showUser')->with('user', $user);
+
 	}
 
 	/**
@@ -96,9 +98,20 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($email)
 	{
-		//
+
+		$users = User::where('email', $email)->get();
+		$usersDelete = User::where('email', $email);
+		foreach ($users as $user){
+		
+			if ($usersDelete->delete()){
+				\Session::flash('message', 'El usuario <b>'.$user->name.'</b> se ha borrado correctamente');
+			}
+	
+		}
+
+		return \Redirect::to('/users');
 	}
 
 }
