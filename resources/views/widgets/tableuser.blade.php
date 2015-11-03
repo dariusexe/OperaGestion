@@ -18,7 +18,7 @@
 			<td>{{$user->email}}</td>
             <td>{{$user->tlf}}</td>
             <td><button type="button" data-toggle="modal" data-target="#sure" class="btn btn-danger" data-whatever="{{$user->email}}">Eliminar</button></td>
-            <td><a class="btn btn-primary" href="{{url("delete/".$user->id)}}">Modificar</a></td>
+            <td><a class="btn btn-primary" href="{{route('edit', $user->id)}}">Modificar</a></td>
 		</tr>
         @endforeach
 	</tbody>

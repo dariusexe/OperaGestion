@@ -15,6 +15,8 @@ Route::get('users', 'UserController@index');
 Route::get('userCreate', 'UserController@create');
 Route::post('userCreate', 'UserController@store');
 Route::get('userDelete/{email}', ['as' => 'delete', 'uses' => 'UserController@destroy']);
+Route::get('userEdit/{id}', ['as' => 'edit', 'uses' => 'UserController@edit']);
+Route::post('userEdit/{id}', ['as' => 'update', 'uses' => 'UserController@update']);
 
 Route::get('/', 'LoginController@index');
 

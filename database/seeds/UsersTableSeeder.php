@@ -13,30 +13,15 @@ class UsersTableSeeder extends Seeder
 	 */
 	public function run()
 	{
-        
-        DB::table('users')->insert([
-            'name'   => 'Darío',
-            'lastName' => 'Vallejo Carrasco',
-            'tlf' => '655447312',
-            'role' => 'sadmin',
-            'email'  => 'darioinfor@gmail.com',
-            'password' => \Hash::make('nesi7yqyw3494'),
+        for ($i=1; $i < 5 ; $i++) { 
+            # code...
+        }
+
+        DB::table('roles')->insert([
+           'id' => $i,
             ]);
         
         
-        
-        
-        $faker = Faker\Factory::create('es_ES');
-        
-        for ($i=0; $i < 50; $i++){
-        
-         DB::table('users')->insert([
-            'name'   => $faker->firstName,
-            'lastName' => $faker->lastName." ".$faker->lastName,
-            'tlf' => $faker->PhoneNumber,
-            'role' => $faker->randomElement(['editor', 'usuario']),
-            'email'  => $faker->unique()->email,
-            'password' => \Hash::make(12345),
             ]);
             
         }

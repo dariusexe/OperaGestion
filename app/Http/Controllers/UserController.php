@@ -11,6 +11,37 @@ class UserController extends Controller {
     public function __construct(){
      $this->middleware('auth');   
     }
+    public function getRoleChild($role)
+	{
+		if ($role == "sadmin"){
+			return array('sadmin', 'admin', 'editor', 'usuario');
+		}
+		if ($role == "admin"){
+			return array('admin', 'editor', 'usuario');
+		}
+		if ($role == "editor"){
+			return array('editor', 'usuario');
+		}
+		if ($role == "usuario"){
+			return array('0' => "usuario" );
+		}
+	}
+
+	 public function getRoleValidation($role)
+	{
+		if ($role == "sadmin"){
+			return "sadmin,admin,editor,usuario";
+		}
+		if ($role == "admin"){
+			return "admin,editor,usuario";
+		}
+		if ($role == "editor"){
+			return "editor,usuario";
+		}
+		if ($role == "usuario"){
+			return  "usuario";
+		}
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -42,13 +73,14 @@ class UserController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		$roleValidation = $this->getRoleValidation(\Auth::user()->role);
         $rules = array(
             'email' => 'required|unique:users,email|email',
             'name' => 'required',
             'lastName' => 'required',
             'tlf' => 'required|digits:9',
             'password' => 'required',
-            'role' => 'required',);
+            'role' => 'required|in:'.$roleValidation,);
         
         $data = $request->all();
         $this->validate($request, $rules);
@@ -78,8 +110,13 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$user = User::find($id);
+		
+		$roleChild = $this->getRoleChild($user->role);
+		return \View::make('userEdit')->with('user', $user)->with('roleChild', $roleChild);
+
 	}
+
 
 	/**
 	 * Update the specified resource in storage.
@@ -87,9 +124,27 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Request $request)
 	{
-		//
+		$user = User::find($id);
+		$roleValidation = $this->getRoleValidation($user->role);
+		
+		
+		$rules2 = array(
+            'email' => 'required|email',
+            'name' => 'required',
+            'lastName' => 'required',
+            'tlf' => 'required|digits:9',
+            'password' => '',
+            'role' => 'required|in:'.$roleValidation);
+        
+        $data = $request->all();
+        $this->validate($request, $rules2);
+   		$user->fill($data);
+   		$user->save();
+        
+        \Session::flash('message', 'El usuario <b>'.$data['email'].'</b> se ha actualizado correctamente');
+        return \Redirect::to('/users');
 	}
 
 	/**
@@ -106,12 +161,14 @@ class UserController extends Controller {
 		foreach ($users as $user){
 		
 			if ($usersDelete->delete()){
-				\Session::flash('message', 'El usuario <b>'.$user->name.'</b> se ha borrado correctamente');
+				\Session::flash('message', 'El usuario <b>'.$user->name.'</b> se ha actualizado correctamente');
 			}
 	
 		}
 
 		return \Redirect::to('/users');
 	}
+
+	
 
 }
