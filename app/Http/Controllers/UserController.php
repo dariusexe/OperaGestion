@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Roles;
 
 class UserController extends Controller {
     
@@ -13,18 +14,23 @@ class UserController extends Controller {
     }
     public function getRoleChild($role)
 	{
-		if ($role == "sadmin"){
-			return array('sadmin', 'admin', 'editor', 'usuario');
+		$canCreate = array();
+		
+		
+			$canRole = Roles::all();
+			foreach ($canRole as $a) {
+				# code...
+			
+
+			if ($a->id >= $role){
+				array_push($canCreate, $a->name);
+			}
 		}
-		if ($role == "admin"){
-			return array('admin', 'editor', 'usuario');
-		}
-		if ($role == "editor"){
-			return array('editor', 'usuario');
-		}
-		if ($role == "usuario"){
-			return array('0' => "usuario" );
-		}
+
+			return dd($canCreate)
+			;
+		
+		
 	}
 
 	 public function getRoleValidation($role)
@@ -41,6 +47,12 @@ class UserController extends Controller {
 		if ($role == "usuario"){
 			return  "usuario";
 		}
+	}
+
+	 public function test()
+	{
+		$this->getRoleChild(2);
+
 	}
 
 	/**

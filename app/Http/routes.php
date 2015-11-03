@@ -78,3 +78,4 @@ Route::get('/documentation', function()
 {
 	return View::make('documentation');
 });
+Route::get('test', 'UserController@test');
