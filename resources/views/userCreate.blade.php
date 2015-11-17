@@ -30,9 +30,9 @@
             <div class="form-group">
                 <label>Tipo</label>
                 <select class="form-control" name="role">
-                    <option>admin</option>
-                    <option>editor</option>
-                    <option>usuario</option>
+                    @foreach ($roleSon as $role))
+                    @if(Auth::user()->role == $role) <option selected="selected">{{$role}}</option>@else <option>{{$role}}</option>@endif
+                    @endforeach
                 </select>
             </div>
             <button type="submit" class="btn btn-default">Enviar</button>

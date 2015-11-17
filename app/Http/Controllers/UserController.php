@@ -12,46 +12,43 @@ class UserController extends Controller {
     public function __construct(){
      $this->middleware('auth');   
     }
-    public function getRoleChild($role)
+
+
+    public function getRoleSon()
 	{
+		$role = \Auth::user()->role;
 		$canCreate = array();
 		
 		
-			$canRole = Roles::all();
-			foreach ($canRole as $a) {
-				# code...
+		$canRole = Roles::all();
+		foreach ($canRole as $a) {
 			
-
 			if ($a->id >= $role){
-				array_push($canCreate, $a->name);
+				$canCreate[$a->id] = $a->name;
 			}
 		}
 
-			return dd($canCreate)
-			;
+
+		ksort($canCreate);
+
+		return $canCreate;
 		
 		
 	}
+	
 
-	 public function getRoleValidation($role)
+	 public function getRoleValidation()
 	{
-		if ($role == "sadmin"){
-			return "sadmin,admin,editor,usuario";
-		}
-		if ($role == "admin"){
-			return "admin,editor,usuario";
-		}
-		if ($role == "editor"){
-			return "editor,usuario";
-		}
-		if ($role == "usuario"){
-			return  "usuario";
-		}
+		$role = \Auth::user()->role;
+		$e = 7;
+		$validationRule = $role.",".$e;
+		
+		return $validationRule;
 	}
 
 	 public function test()
 	{
-		$this->getRoleChild(2);
+		$this->getRoleId('admin');
 
 	}
 
@@ -63,7 +60,8 @@ class UserController extends Controller {
 	public function index()
 	{
 		
-    $clientes = User::paginate(20);
+    $clientes = User::where('role', '>=', \Auth::user()->role);
+    $clientes = $clientes->paginate(10);
     return \View::make('users')->with('users', $clientes);//
 	
     }
@@ -75,7 +73,10 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		return \View::make('userCreate');
+		$role = (\Auth::user()->role);
+		$roleSon = $this->getRoleSon();
+
+		return \View::make('userCreate')->with('roleSon', $roleSon);
 	}
 
 	/**
@@ -92,7 +93,7 @@ class UserController extends Controller {
             'lastName' => 'required',
             'tlf' => 'required|digits:9',
             'password' => 'required',
-            'role' => 'required|in:'.$roleValidation,);
+            'role' => 'required|between:'.$roleValidation,);
         
         $data = $request->all();
         $this->validate($request, $rules);
@@ -110,6 +111,7 @@ class UserController extends Controller {
 	public function show($id)
 	{
 		$user = User::findById($id);
+
 		return \View::make('showUser')->with('user', $user);
 
 	}
@@ -124,8 +126,8 @@ class UserController extends Controller {
 	{
 		$user = User::find($id);
 		
-		$roleChild = $this->getRoleChild($user->role);
-		return \View::make('userEdit')->with('user', $user)->with('roleChild', $roleChild);
+		$roleSon = $this->getRoleSon();
+		return \View::make('userEdit')->with('user', $user)->with('roleSon', $roleSon);
 
 	}
 
@@ -148,7 +150,7 @@ class UserController extends Controller {
             'lastName' => 'required',
             'tlf' => 'required|digits:9',
             'password' => '',
-            'role' => 'required|in:'.$roleValidation);
+            'role' => 'required|between:'.$roleValidation);
         
         $data = $request->all();
         $this->validate($request, $rules2);

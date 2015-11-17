@@ -30,8 +30,15 @@
             <div class="form-group">
                 <label>Tipo</label>
                 <select class="form-control" name="role" >
-                    @foreach ($roleChild as $role))
-                    @if($user->role == $role) <option selected="selected">{{$role}}</option>@else <option>{{$role}}</option>@endif
+                    @foreach ($roleSon as $key => $role)
+                    
+
+                    @if($user->role == $key) 
+                        <option selected="selected" value="{{$key}}">{{$role}}</option> 
+                    @else 
+                        <option value="{{$key}}">{{$role}}</option> 
+                    @endif
+                    
                     @endforeach
 
                 </select>
