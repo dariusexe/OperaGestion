@@ -23,7 +23,7 @@ class UserController extends Controller {
 		$canRole = Roles::all();
 		foreach ($canRole as $a) {
 			
-			if ($a->id >= $role){
+			if ($a->id <= $role){
 				$canCreate[$a->id] = $a->name;
 			}
 		}
@@ -40,8 +40,8 @@ class UserController extends Controller {
 	 public function getRoleValidation()
 	{
 		$role = \Auth::user()->role;
-		$e = 7;
-		$validationRule = $role.",".$e;
+		$e = 1;
+		$validationRule = $e.",".$role;
 		
 		return $validationRule;
 	}
@@ -60,7 +60,7 @@ class UserController extends Controller {
 	public function index()
 	{
 		
-    $clientes = User::where('role', '>=', \Auth::user()->role);
+    $clientes = User::where('role', '<=', \Auth::user()->role);
     $clientes = $clientes->paginate(10);
     return \View::make('users')->with('users', $clientes);//
 	
