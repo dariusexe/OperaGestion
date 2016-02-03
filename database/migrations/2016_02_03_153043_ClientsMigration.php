@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +16,7 @@ class ClientsMigration extends Migration
         {
             $table->increments('id');
             $table->string('name');
-            $table->string('lastname');
+            $table->string('lastName');
             $table->string('identification')->unique();
             $table->tinyInteger('type');
             $table->string('state');
