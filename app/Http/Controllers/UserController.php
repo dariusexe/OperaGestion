@@ -157,7 +157,11 @@ class UserController extends Controller {
    		$user->fill($data);
    		$user->save();
         
-        \Session::flash('message', 'El usuario <b>'.$data['email'].'</b> se ha actualizado correctamente');
+        \Session::flash('message1', 'El usuario');
+		\Session::flash('message2',  'se ha borrado correctamente');
+		\Session::flash('name', $data['email']);
+        
+
         return \Redirect::to('/users');
 	}
 
@@ -175,7 +179,9 @@ class UserController extends Controller {
 		foreach ($users as $user){
 		
 			if ($usersDelete->delete()){
-				\Session::flash('message', 'El usuario <b>'.$user->name.'</b> se ha actualizado correctamente');
+				\Session::flash('message1', 'El usuario');
+				\Session::flash('message2',  'se ha borrado correctamente');
+				\Session::flash('name', $user->name);
 			}
 	
 		}

@@ -20,7 +20,7 @@ class ClientsSeeder extends Seeder
             'lastName' => $faker->lastName." ".$faker->lastName,
             'identification' => $faker->PhoneNumber,
             'type' => $faker->randomElement(['1','2']),
-            'email'  => $faker->unique()->email,
+            'state'  => $faker->unique()->email,
             'password' => \Hash::make(12345),
             'password' => \Hash::make(12345),
             'password' => \Hash::make(12345),

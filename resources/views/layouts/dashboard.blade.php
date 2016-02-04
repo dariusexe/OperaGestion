@@ -26,7 +26,7 @@
                         {{ Auth::user()->name }}<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{{route('edit', Auth::user()->id)}}"><i class="fa fa-user fa-fw"></i>Perfil</a>
+                        <li><a href="{{route('users.edit', Auth::user()->id)}}"><i class="fa fa-user fa-fw"></i>Perfil</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i>Configuración</a>
                         </li>
@@ -63,8 +63,8 @@
                                 <li {{ (Request::is('users') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('users') }}">Lista de usuarios</a>
                                 </li>
-                                 <li {{ (Request::is('userCreate') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('userCreate') }}">Nuevo usuario</a>
+                                 <li {{ (Request::is('users/create') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('users/create') }}">Nuevo usuario</a>
                                 </li>
                             </ul>
                         
