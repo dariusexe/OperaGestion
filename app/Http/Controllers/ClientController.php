@@ -25,7 +25,7 @@ class ClientController extends Controller {
 	 */
 	public function create()
 	{
-		
+		return view('clients.create');
 	}
 
 	/**
@@ -46,7 +46,9 @@ class ClientController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$client = Client::find($id);
+
+		return view('clients.edit')->with('client', $client);
 	}
 
 	/**
@@ -57,7 +59,8 @@ class ClientController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$client = Client::find($id);
+		return view('user.edit')->with('client', $client)
 	}
 
 	/**

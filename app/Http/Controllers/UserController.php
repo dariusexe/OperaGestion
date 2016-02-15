@@ -46,12 +46,7 @@ class UserController extends Controller {
 		return $validationRule;
 	}
 
-	 public function test()
-	{
-		$this->getRoleId('admin');
-
-	}
-
+	
 	/**
 	 * Display a listing of the resource.
 	 *
