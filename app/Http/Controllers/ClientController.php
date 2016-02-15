@@ -4,8 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Client;
 
-class ClientControler extends Controller {
+class ClientController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -14,8 +15,8 @@ class ClientControler extends Controller {
 	 */
 	public function index()
 	{
-		//
-	}
+		$clients = Client::paginate(15);
+		return view('clients.clients')->with('data', $clients);	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -24,7 +25,7 @@ class ClientControler extends Controller {
 	 */
 	public function create()
 	{
-		//
+		
 	}
 
 	/**

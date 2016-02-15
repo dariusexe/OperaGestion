@@ -62,7 +62,9 @@ class UserController extends Controller {
 		
     $clientes = User::where('role', '<=', \Auth::user()->role);
     $clientes = $clientes->paginate(10);
-    return \View::make('users')->with('users', $clientes);//
+
+
+    return \View::make('users')->with('data', $clientes);//
 	
     }
 
@@ -75,6 +77,7 @@ class UserController extends Controller {
 	{
 		$role = (\Auth::user()->role);
 		$roleSon = $this->getRoleSon();
+
 
 		return \View::make('userCreate')->with('roleSon', $roleSon);
 	}
@@ -108,11 +111,30 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($id, Request $request)
 	{
-		$user = User::findById($id);
+
+		$user = User::find($id);
+
+	
+		
+
+
+		if ($request->ajax()){
+			$this->middleware('token');
+			
+    		return $user->name;
+   		 }
+
+
+
+		
 
 		return \View::make('showUser')->with('user', $user);
+
+
+		
+    
 
 	}
 

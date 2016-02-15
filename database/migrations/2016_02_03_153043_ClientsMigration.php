@@ -19,9 +19,9 @@ class ClientsMigration extends Migration
             $table->string('lastName');
             $table->string('identification')->unique();
             $table->tinyInteger('type');
-            $table->string('state');
-            $table->string('town');
-            $table->string('adress');
+            $table->string('country');
+            $table->string('city');
+            $table->string('address');
             $table->string('PC');
             $table->string('IBAN');
             $table->string('email')->unique();

@@ -7,6 +7,12 @@
                 <h4 class="modal-title" id="myModalLabel">Eliminar Usuario</h4>
             </div>
             <div class="modal-body">
+            <form method="POST" action="{{url('/users').'/:USER_ID'}}" id="form-delete">
+            <input name="_method" type="hidden" value="GET">
+            <input name="_token" type="hidden" value="">
+
+
+         </form> 
             </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
