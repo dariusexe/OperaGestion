@@ -37,8 +37,6 @@ Route::auth();
 
 Route::resource('users', 'UserController');
 
-Route::get('userDelete/{email}', 'UserController@destroy');
-
 Route::resource('clients', 'ClientController');
 
 Route::resource('contract', 'ContractController');
