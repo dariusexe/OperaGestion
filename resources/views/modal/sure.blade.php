@@ -4,22 +4,23 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Eliminar Usuario</h4>
+                <h4 class="modal-title" id="myModalLabel">Eliminar usuario</h4>
             </div>
             <div class="modal-body">
-            <form method="POST" action="{{url('/users').'/:USER_ID'}}" id="form-delete">
-            <input name="_method" type="hidden" value="GET">
-            <input name="_token" type="hidden" value="">
+            
 
 
-         </form> 
+            
+
             </div>
       <div class="modal-footer">
+      <form method="POST" action="" id="form-delete">
+            <input name="_method" type="hidden" value="DELETE">
+            <input name="_token" type="hidden" value="{{csrf_token()}}">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <a href="#" class="btn btn-danger" >Borrar</a>
-
+        <button type="submit" class="btn btn-danger" id="delete2">Borrar</button>
+        </form> 
       </div>
-            
         </div>
     </div>
 </div>

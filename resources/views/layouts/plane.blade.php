@@ -23,30 +23,22 @@ $('#sure').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var id = button.data('whatever')
   var form = $('#form-delete')
-  var url = form.attr('action').replace(':USER_ID', id)
-  var data = form.serialize();
+  
   
 
-  $.post(url, data, function(result){
-  		var nombre = result
-  		
- 	modal.find('.modal-body').html('Esta a punto de borrar al usuario '+ nombre +' ¿Está seguro?')
-    modal.find('.btn-danger').attr('href', "/userDelete/"+id)
+
  
-  })
-
-
-
-
-var modal = $(this)
-
-   
-  // Extract info from data-* attributes
+  
+ // Extract info from data-* attributes
+  
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-body').text("Está seguro que quiere borrar al usuario "+id)
+  form.attr('action', 'users/'+id)
 
- // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
- 
+
+
   
 })
 </script>

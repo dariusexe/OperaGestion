@@ -84,6 +84,7 @@ class UserController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+
 		$roleValidation = $this->getRoleValidation(\Auth::user()->role);
         $rules = array(
             'email' => 'required|unique:users,email|email',
@@ -157,6 +158,7 @@ class UserController extends Controller {
 	 */
 	public function update($id, Request $request)
 	{
+		
 		$user = User::find($id);
 		$roleValidation = $this->getRoleValidation($user->role);
 		
@@ -188,20 +190,15 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($email)
+	public function destroy($id)
 	{
 
-		$users = User::where('email', $email)->get();
-		$usersDelete = User::where('email', $email);
-		foreach ($users as $user){
-		
-			if ($usersDelete->delete()){
+			if (User::destroy($id)){
 				\Session::flash('message1', 'El usuario');
 				\Session::flash('message2',  'se ha borrado correctamente');
-				\Session::flash('name', $user->name);
 			}
 	
-		}
+		
 
 		return \Redirect::to('/users');
 	}

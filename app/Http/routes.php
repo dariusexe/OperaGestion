@@ -39,7 +39,6 @@ Route::resource('users', 'UserController');
 
 Route::resource('clients', 'ClientController');
 
-Route::resource('contract', 'ContractController');
 
 Route::get('/', 'LoginController@index');
 

@@ -12,7 +12,7 @@
 	</thead>
 	<tbody>
         @foreach($data as $data2)
-		<tr>
+		<tr data-id="{{$data2->id}}">
             <td>{{$data2->name}}</td>
 			<td>{{$data2->lastName}}</td>
 			<td>{{$data2->email}}</td>

@@ -60,7 +60,7 @@ class ClientController extends Controller {
 	public function edit($id)
 	{
 		$client = Client::find($id);
-		return view('user.edit')->with('client', $client)
+		return view('user.edit')->with('client', $client);
 	}
 
 	/**
