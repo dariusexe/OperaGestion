@@ -21,9 +21,9 @@
     <script type="text/javascript">
 $('#sure').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
-  var id = button.data('whatever')
+  var id = button.data('id')
+  var name = button.data('name')
   var form = $('#form-delete')
-  
   
 
 
@@ -34,7 +34,7 @@ $('#sure').on('show.bs.modal', function (event) {
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  modal.find('.modal-body').text("Está seguro que quiere borrar al usuario "+id)
+  modal.find('.modal-body').html("Está seguro que quiere borrar al usuario <b>"+name+"</b>")
   form.attr('action', 'users/'+id)
 
 

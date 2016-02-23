@@ -13,39 +13,6 @@ class UserController extends Controller {
      $this->middleware('auth');   
     }
 
-
-    public function getRoleSon()
-	{
-		$role = \Auth::user()->role;
-		$canCreate = array();
-		
-		
-		$canRole = Roles::all();
-		foreach ($canRole as $a) {
-			
-			if ($a->id <= $role){
-				$canCreate[$a->id] = $a->name;
-			}
-		}
-
-
-		ksort($canCreate);
-
-		return $canCreate;
-		
-		
-	}
-	
-
-	 public function getRoleValidation()
-	{
-		$role = \Auth::user()->role;
-		$e = 1;
-		$validationRule = $e.",".$role;
-		
-		return $validationRule;
-	}
-
 	
 	/**
 	 * Display a listing of the resource.
@@ -55,8 +22,8 @@ class UserController extends Controller {
 	public function index()
 	{
 		
-    $clientes = User::where('role', '<=', \Auth::user()->role);
-    $clientes = $clientes->paginate(10);
+    $clientes = User::paginate(20);
+    
 
 
     return \View::make('users')->with('data', $clientes);//
@@ -192,9 +159,10 @@ class UserController extends Controller {
 	 */
 	public function destroy($id)
 	{
-
+			$usuario = User::find($id);
 			if (User::destroy($id)){
 				\Session::flash('message1', 'El usuario');
+				\Session::flash('name', $usuario->getFullName());
 				\Session::flash('message2',  'se ha borrado correctamente');
 			}
 	

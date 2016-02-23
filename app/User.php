@@ -38,5 +38,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 
 	}
+	public function getFullName()
+	{
+		return $this->attributes['name']." ".$this->attributes['lastName'];
+	}
 
 }

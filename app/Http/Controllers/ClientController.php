@@ -8,6 +8,24 @@ use App\Client;
 
 class ClientController extends Controller {
 
+
+	$rules = array(   "name" => ""
+						  "lastName" => ""
+						  "identification" => ""
+						  "type" => "Pyme"
+						  "phone" => ""
+						  "email" => ""
+						  "legalPartner" => ""
+						  "CIFLegalPartner" => ""
+						  "country" => ""
+						  "city" => ""
+						  "address" => ""
+						  "PC" => ""
+						  "IBAN" => ""
+						  "contactPerson" => ""
+						  "contactPhone" => ""
+						  "comentary" => "");
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -33,9 +51,9 @@ class ClientController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		
 	}
 
 	/**
@@ -71,7 +89,7 @@ class ClientController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		
 	}
 
 	/**
