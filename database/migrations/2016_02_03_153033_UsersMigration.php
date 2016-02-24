@@ -18,7 +18,7 @@ class UsersMigration extends Migration
             $table->string('name');
             $table->string('lastName');
             $table->string('email')->unique();
-            $table->integer('tlf');
+            $table->integer('phone');
             $table->string('role');
             $table->string('password', 60);
             $table->rememberToken();

@@ -27,14 +27,7 @@
                 <label>Contraseña</label>
                 <input class="form-control" type="password" name="password">
             </div>
-            <div class="form-group">
-                <label>Tipo</label>
-                <select class="form-control" name="role">
-                    @foreach ($roleSon as $role))
-                    @if(Auth::user()->role == $role) <option selected="selected">{{$role}}</option>@else <option>{{$role}}</option>@endif
-                    @endforeach
-                </select>
-            </div>
+            
             <button type="submit" class="btn btn-default">Enviar</button>
         </form>
     </div>

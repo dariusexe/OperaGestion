@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Roles;
+use Session;
 
 class UserController extends Controller {
     
@@ -37,11 +38,7 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		$role = (\Auth::user()->role);
-		$roleSon = $this->getRoleSon();
-
-
-		return \View::make('userCreate')->with('roleSon', $roleSon);
+		return \View::make('userCreate');
 	}
 
 	/**
@@ -52,18 +49,16 @@ class UserController extends Controller {
 	public function store(Request $request)
 	{
 
-		$roleValidation = $this->getRoleValidation(\Auth::user()->role);
         $rules = array(
             'email' => 'required|unique:users,email|email',
             'name' => 'required',
             'lastName' => 'required',
-            'tlf' => 'required|digits:9',
-            'password' => 'required',
-            'role' => 'required|between:'.$roleValidation,);
+            'phone' => 'required|digits:9',
+            'password' => 'required');
         
         $data = $request->all();
         $this->validate($request, $rules);
-   		\Session::flash('message', 'El usuario <b>'.$data['email'].'</b> se ha creado correctamente');
+   		Session::flash('message', 'El usuario '.$data['email'].' se ha creado correctamente');
         $user = User::create($data);
         return \Redirect::to('/users');
 	}
@@ -78,19 +73,6 @@ class UserController extends Controller {
 	{
 
 		$user = User::find($id);
-
-	
-		
-
-
-		if ($request->ajax()){
-			$this->middleware('token');
-			
-    		return $user->name;
-   		 }
-
-
-
 		
 
 		return \View::make('showUser')->with('user', $user);
@@ -111,8 +93,7 @@ class UserController extends Controller {
 	{
 		$user = User::find($id);
 		
-		$roleSon = $this->getRoleSon();
-		return \View::make('userEdit')->with('user', $user)->with('roleSon', $roleSon);
+		return \View::make('userEdit')->with('user', $user);
 
 	}
 
@@ -127,7 +108,6 @@ class UserController extends Controller {
 	{
 		
 		$user = User::find($id);
-		$roleValidation = $this->getRoleValidation($user->role);
 		
 		
 		$rules2 = array(
@@ -135,17 +115,16 @@ class UserController extends Controller {
             'name' => 'required',
             'lastName' => 'required',
             'tlf' => 'required|digits:9',
-            'password' => '',
-            'role' => 'required|between:'.$roleValidation);
+            'password' => '');
         
         $data = $request->all();
         $this->validate($request, $rules2);
    		$user->fill($data);
    		$user->save();
         
-        \Session::flash('message1', 'El usuario');
-		\Session::flash('message2',  'se ha borrado correctamente');
-		\Session::flash('name', $data['email']);
+        Session::flash('message1', 'El usuario');
+		Session::flash('message2',  'se ha modificado correctamente');
+		Session::flash('name', $data['name']." ".$data['lastName']);
         
 
         return \Redirect::to('/users');
@@ -161,9 +140,9 @@ class UserController extends Controller {
 	{
 			$usuario = User::find($id);
 			if (User::destroy($id)){
-				\Session::flash('message1', 'El usuario');
-				\Session::flash('name', $usuario->getFullName());
-				\Session::flash('message2',  'se ha borrado correctamente');
+				Session::flash('message1', 'El usuario');
+				Session::flash('name', $usuario->getFullName());
+				Session::flash('message2',  'se ha borrado correctamente');
 			}
 	
 		

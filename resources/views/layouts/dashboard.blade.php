@@ -72,6 +72,14 @@
                         </li>
                         <li {{ (Request::is('*clients') ? 'class="active"' : '') }}>
                             <a href="{{ url ('clients') }}"><i class="fa fa-users fa-fw"></i> Clientes</a>
+                            <ul class="nav nav-second-level">
+                                <li {{ (Request::is('clients') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('clients') }}">Lista de Clientes</a>
+                                </li>
+                                 <li {{ (Request::is('clients/create') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('clients/create') }}">Nuevo Cliente</a>
+                                </li>
+                            </ul>
                         </li>
                         <li {{ (Request::is('*presupuesto') ? 'class="active"' : '') }}>
                             <a href="{{ url ('presupuesto') }}"><i class="fa fa-file fa-fw"></i> Presupuestos</a>

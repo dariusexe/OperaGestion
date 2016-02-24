@@ -9,22 +9,7 @@ use App\Client;
 class ClientController extends Controller {
 
 
-	$rules = array(   "name" => ""
-						  "lastName" => ""
-						  "identification" => ""
-						  "type" => "Pyme"
-						  "phone" => ""
-						  "email" => ""
-						  "legalPartner" => ""
-						  "CIFLegalPartner" => ""
-						  "country" => ""
-						  "city" => ""
-						  "address" => ""
-						  "PC" => ""
-						  "IBAN" => ""
-						  "contactPerson" => ""
-						  "contactPhone" => ""
-						  "comentary" => "");
+	
 
 	/**
 	 * Display a listing of the resource.
@@ -54,6 +39,32 @@ class ClientController extends Controller {
 	public function store(Request $request)
 	{
 		
+		$rules = array(   "name" => "required",
+						  "lastName" => "required",
+						  "identification" => "required|unique:clients,identification",
+						  "type" => "",
+						  "phone" => "required|digits:9",
+						  "email" => "email",
+						  "legalPartner" => "",
+						  "CIFLegalPartner" => "",
+						  "country" => "required",
+						  "city" => "required",
+						  "address" => "required",
+						  "PC" => "required|digits:5",
+						  "IBAN" => "",
+						  "contactPerson" => "",
+						  "contactPhone" => "digits:9",
+						  "comentary" => "");
+		$data = $request->all();
+		$this->validate($request, $rules);
+		if (Client::create($data)){
+			\Session::flash('message', 'El cliente '.$data['name'].' '.$data['lastName'].' se ha creado correctamente');
+		}
+		else{
+			\Session::flash('error', 'No se ha podido crear el cliente');
+		}
+		return \Redirect::to('/clients');
+		
 	}
 
 	/**
@@ -78,7 +89,7 @@ class ClientController extends Controller {
 	public function edit($id)
 	{
 		$client = Client::find($id);
-		return view('user.edit')->with('client', $client);
+		return view('clients.edit')->with('client', $client);
 	}
 
 	/**
@@ -87,9 +98,36 @@ class ClientController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Request $request)
 	{
-		
+		$client = Client::find($id);
+		$rules2 = array(   "name" => "required",
+						  "lastName" => "required",
+						  "identification" => "",
+						  "type" => "",
+						  "phone" => "required|digits:9",
+						  "email" => "email",
+						  "legalPartner" => "",
+						  "CIFLegalPartner" => "",
+						  "country" => "required",
+						  "city" => "required",
+						  "address" => "required",
+						  "PC" => "required|digits:5",
+						  "IBAN" => "",
+						  "contactPerson" => "",
+						  "contactPhone" => "digits:9",
+						  "comentary" => "");
+		$data = $request->all();
+		$this->validate($request, $rules2);
+   		$client->fill($data);
+   		$client->save();
+        
+        \Session::flash('message1', 'El cliente');
+		\Session::flash('message2',  'se ha modificado correctamente');
+		\Session::flash('name', $data['name']." ".$data['lastName']);
+        
+
+        return \Redirect::to('/clients');
 	}
 
 	/**
