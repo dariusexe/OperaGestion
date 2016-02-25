@@ -28,7 +28,9 @@
 |
 */
 
-
+Route::get('panel', function(){
+    return View::make('panel');
+});
 
 Route::group(['middleware' => 'web'], function () {
 

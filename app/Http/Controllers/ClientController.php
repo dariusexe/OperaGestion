@@ -1,10 +1,13 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
+
+use App\User;
 use Illuminate\Http\Request;
 use App\Client;
+use Redirect;
+use Session;
 
 class ClientController extends Controller {
 
@@ -18,7 +21,7 @@ class ClientController extends Controller {
 	 */
 	public function index()
 	{
-		$clients = Client::paginate(15);
+		$clients = Client::all();
 		return view('clients.clients')->with('data', $clients);	}
 
 	/**
@@ -58,12 +61,12 @@ class ClientController extends Controller {
 		$data = $request->all();
 		$this->validate($request, $rules);
 		if (Client::create($data)){
-			\Session::flash('message', 'El cliente '.$data['name'].' '.$data['lastName'].' se ha creado correctamente');
+			Session::flash('message', 'El cliente '.$data['name'].' '.$data['lastName'].' se ha creado correctamente');
 		}
 		else{
-			\Session::flash('error', 'No se ha podido crear el cliente');
+			Session::flash('error', 'No se ha podido crear el cliente');
 		}
-		return \Redirect::to('/clients');
+		return Redirect::to('/clients');
 		
 	}
 
@@ -77,7 +80,7 @@ class ClientController extends Controller {
 	{
 		$client = Client::find($id);
 
-		return view('clients.edit')->with('client', $client);
+		return view('clients.show')->with('client', $client);
 	}
 
 	/**
@@ -122,12 +125,12 @@ class ClientController extends Controller {
    		$client->fill($data);
    		$client->save();
         
-        \Session::flash('message1', 'El cliente');
-		\Session::flash('message2',  'se ha modificado correctamente');
-		\Session::flash('name', $data['name']." ".$data['lastName']);
+        Session::flash('message1', 'El cliente');
+		Session::flash('message2',  'se ha modificado correctamente');
+		Session::flash('name', $data['name']." ".$data['lastName']);
         
 
-        return \Redirect::to('/clients');
+        return Redirect::to('/clients');
 	}
 
 	/**
@@ -138,7 +141,16 @@ class ClientController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$clients = Client::find($id);
+		if (Client::destroy($id)){
+			Session::flash('message1', 'El cliente');
+			Session::flash('name', $clients->getFullName());
+			Session::flash('message2',  'se ha borrado correctamente');
+		}
+
+
+
+		return Redirect::to('/clients');
 	}
 
 }

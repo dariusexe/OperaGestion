@@ -1,12 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use App\User;
-use App\Roles;
+use Redirect;
 use Session;
+use View;
 
 class UserController extends Controller {
     
@@ -23,11 +22,11 @@ class UserController extends Controller {
 	public function index()
 	{
 		
-    $clientes = User::paginate(20);
+    $clientes = User::all();
     
 
 
-    return \View::make('users')->with('data', $clientes);//
+    return View::make('users')->with('data', $clientes);//
 	
     }
 
@@ -38,7 +37,7 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		return \View::make('userCreate');
+		return View::make('userCreate');
 	}
 
 	/**
@@ -60,7 +59,7 @@ class UserController extends Controller {
         $this->validate($request, $rules);
    		Session::flash('message', 'El usuario '.$data['email'].' se ha creado correctamente');
         $user = User::create($data);
-        return \Redirect::to('/users');
+        return Redirect::to('/users');
 	}
 
 	/**
@@ -75,7 +74,7 @@ class UserController extends Controller {
 		$user = User::find($id);
 		
 
-		return \View::make('showUser')->with('user', $user);
+		return View::make('showUser')->with('user', $user);
 
 
 		
@@ -93,7 +92,7 @@ class UserController extends Controller {
 	{
 		$user = User::find($id);
 		
-		return \View::make('userEdit')->with('user', $user);
+		return View::make('userEdit')->with('user', $user);
 
 	}
 
@@ -114,7 +113,7 @@ class UserController extends Controller {
             'email' => 'required|email',
             'name' => 'required',
             'lastName' => 'required',
-            'tlf' => 'required|digits:9',
+            'phone' => 'required|digits:9',
             'password' => '');
         
         $data = $request->all();
@@ -127,7 +126,7 @@ class UserController extends Controller {
 		Session::flash('name', $data['name']." ".$data['lastName']);
         
 
-        return \Redirect::to('/users');
+        return Redirect::to('/users');
 	}
 
 	/**
@@ -147,7 +146,7 @@ class UserController extends Controller {
 	
 		
 
-		return \Redirect::to('/users');
+		return Redirect::to('/users');
 	}
 
 	

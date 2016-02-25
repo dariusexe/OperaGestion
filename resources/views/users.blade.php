@@ -17,7 +17,7 @@
         @include('modal.sure')
 		@endsection
 		@include('widgets.panel', array('header'=>true, 'as'=>'table'))
-        {{ $data->render() }}
+
            
 @stop
 

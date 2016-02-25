@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label>Teléfono de contacto</label>
-                <input class="form-control" name="tlf" value="{{$user->tlf}}">
+                <input class="form-control" name="phone" value="{{$user->phone}}">
             </div>
             <div class="form-group">
                 <label>Contraseña</label>

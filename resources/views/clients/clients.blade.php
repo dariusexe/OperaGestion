@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 @section('page_heading','Clientes')
+@section('section')
          
 
 
@@ -12,10 +13,10 @@
                     </div>
                 @endif
 
-        @include('widgets.listClients', array('class'=>''))
+        @include('widgets.list', array('class'=>''))
         @include('modal.sure')
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'table'))
-        {{ $data->render() }}
+
            
 @stop

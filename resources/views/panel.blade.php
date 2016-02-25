@@ -77,4 +77,5 @@
 		@endsection
 		@include('widgets.panel', array('header'=>true, 'as'=>'collapsible'))
 	</div>
+	@ends
 @stop
