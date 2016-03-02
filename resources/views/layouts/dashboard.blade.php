@@ -87,8 +87,8 @@
                          <li {{ (Request::is('*Contract') ? 'class="active"' : '') }}>
                             <a href="{{ url ('Contract') }}"><i class="fa fa-file-text fa-fw"></i> Contratos</a>
                         </li>
-                         <li {{ (Request::is('*options') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('options') }}"><i class="fa fa-wrench fa-fw"></i> Opciones</a>
+                         <li {{ (Request::is('*products') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('products') }}"><i class="fa fa-archive fa-fw"></i> Productos</a>
                         </li>
                             
                 </div>

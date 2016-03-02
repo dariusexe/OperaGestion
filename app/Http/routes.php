@@ -41,10 +41,22 @@ Route::resource('users', 'UserController');
 
 Route::resource('clients', 'ClientController');
 
+Route::resource('products', 'ProductController');
+
+
+
+
+Route::group(['as' => 'products.class.'], function(){
+        Route::get('products/class', 'ProductController@indexClass')->name('index');
+    Route::get('products/class/create', 'ProductController@createClass')->name('create');
+    Route::post('products/class', 'ProductController@storeClass')->name('store');
+    Route::get('products/class/{id}', 'ProductController@destroyClass')->name('destroy');
+    });
+
 
 Route::get('/', 'LoginController@index');
 
 Route::get("home", 'HomeController@index');
 
-Route::get('test', 'UserController@test');
+Route::get('test', 'ProductController@test');
 });

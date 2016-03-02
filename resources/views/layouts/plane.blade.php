@@ -46,7 +46,7 @@ $('#sure').on('show.bs.modal', function (event) {
 })
 </script>
 <script type="text/javascript">
-	$('tbody tr').on("click", function() {
+	$('tbody tr #link').on("click", function() {
 		if($(this).attr('href') !== undefined){
 			document.location = $(this).attr('href');
 		}
