@@ -12,7 +12,7 @@
 	<meta content="" name="description"/>
 	<meta content="" name="author"/>
 	<link rel="shortcut icon" href="{{ asset('favicon.png') }}">
-	<link rel="stylesheet" type="text/css" href="{{asset("assets/stylesheets/dataTables.bootstrap4.css")}}">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css">
 
 
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
@@ -46,17 +46,19 @@ $('#sure').on('show.bs.modal', function (event) {
 })
 </script>
 <script type="text/javascript">
-	$('tbody tr #link').on("click", function() {
-		if($(this).attr('href') !== undefined){
-			document.location = $(this).attr('href');
-		}
-	})
+	$('tbody tr')
 			.mouseover(function(){
 				$(this).css('background-color','#F5F5F5')
 			})
 			.mouseout(function(){
 				$(this).css('background-color','white')
 			})
+
+	$('tbody tr #link').on("click", function() {
+		if($(this).attr('href') !== undefined){
+			document.location = $(this).attr('href');
+		}
+	})
 
 </script>
 	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
@@ -70,7 +72,7 @@ $('#sure').on('show.bs.modal', function (event) {
 			} );
 		} );
 	</script>
-	<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap4.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
 
 </body>
 </html>
