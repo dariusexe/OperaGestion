@@ -30,6 +30,9 @@
                 <option>
                     Residencial
                 </option>
+                 <option>
+                     Micropyme
+                 </option>
                 </select> 
             </div>
             <div class="form-group">

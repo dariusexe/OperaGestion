@@ -18,7 +18,7 @@
 			<td id="link" href="{{route('clients.show', $data2->id)}}">{{$data2->email}}</td>
             <td id="link" href="{{route('clients.show', $data2->id)}}">{{$data2->phone}}</td>
             <td><button type="button" data-toggle="modal" data-target="#sure" class="btn btn-danger" data-id="{{$data2->id}}" data-name="{{$data2->getFullName()}}" data-source="{{Request::url()}}" id="btn-delete">Eliminar</button></td>
-            <td><a class="btn btn-primary" href="{{route('users.edit', $data2->id)}}">Modificar</a></td>
+            <td><a class="btn btn-primary" href="{{Request::url().'/'.$data2->id.'/edit'}}">Modificar</a></td>
 		</tr>
         @endforeach
 	</tbody>
