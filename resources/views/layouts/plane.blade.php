@@ -73,6 +73,33 @@ $('#sure').on('show.bs.modal', function (event) {
 		} );
 	</script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+	var ctx = document.getElementById('linechart').getContext('2d');
+	var data = {
+		labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"],
+		datasets: [
+			{
+				label: "My First dataset",
+				fillColor: "rgba(220,220,220,0.5)",
+				strokeColor: "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data: [65, 59, 80, 81, 32]
+			},
+			{
+				label: "My Second dataset",
+				fillColor: "rgba(151,187,205,0.5)",
+				strokeColor: "rgba(151,187,205,0.8)",
+				highlightFill: "rgba(151,187,205,0.75)",
+				highlightStroke: "rgba(151,187,205,1)",
+				data: [28, 48, 40, 19, 86, 27, 90]
+			}
+		]
+	};
+	var myNewChart = new Chart(ctx).Bar(data)
+
+
+</script>
 
 </body>
 </html>
