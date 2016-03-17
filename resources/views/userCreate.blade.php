@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-lg-6">
          @include('errors.showErrors')            
-        <form role="form" method="post" action="{{url('userCreate')}}">
+        <form role="form" method="post" action="{{route('users.store')}}"}}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <p><label>Correo electrónico</label></p>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label>Teléfono de contacto</label>
-                <input class="form-control" name="tlf">
+                <input class="form-control" name="phone">
             </div>
             <div class="form-group">
                 <label>Contraseña</label>

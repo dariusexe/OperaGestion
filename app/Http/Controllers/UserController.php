@@ -47,7 +47,6 @@ class UserController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-
         $rules = array(
             'email' => 'required|unique:users,email|email',
             'name' => 'required',
@@ -57,9 +56,14 @@ class UserController extends Controller {
         
         $data = $request->all();
         $this->validate($request, $rules);
-   		Session::flash('message', 'El usuario '.$data['email'].' se ha creado correctamente');
-        $user = User::create($data);
-        return Redirect::to('/users');
+
+
+		Session::flash('message', 'El usuario '.$data['email'].' se ha creado correctamente');
+
+		if(User::create($data)){
+			return Redirect::to('/users');
+		}
+        else response(404);
 	}
 
 	/**
