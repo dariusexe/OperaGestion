@@ -100,12 +100,12 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
-                    @section ('cchart11_panel_title','Line Chart')
-                    @section ('cchart11_panel_body')
-                    @include('widgets.charts.clinechart')
+                    @section ('cchart1_panel_title','Ventas')
+                    @section ('cchart1_panel_body')
+                    @include('widgets.charts.linechart')
                     @endsection
                 
-                @include('widgets.panel', array('header'=>true, 'as'=>'cchart11'))
+                @include('widgets.panel', array('header'=>true, 'as'=>'cchart1'))
                 
                 </div>
                 <!-- /.col-lg-8 -->

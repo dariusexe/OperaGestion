@@ -60,7 +60,7 @@
                         <li >
                             <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li {{ (Request::is('users') ? 'class="active"' : '') }}>
+                                <li {{ (Request::is('*users') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('users') }}">Lista de usuarios</a>
                                 </li>
                                  <li {{ (Request::is('users/create') ? 'class="active"' : '') }}>
