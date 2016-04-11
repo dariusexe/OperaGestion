@@ -6,8 +6,9 @@ use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
 use App\Client;
+use Illuminate\Support\Facades\Session;
 use Redirect;
-use Session;
+
 
 class ClientController extends Controller {
 

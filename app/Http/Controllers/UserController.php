@@ -9,12 +9,12 @@ use View;
 
 class UserController extends Controller {
     
-    public function __construct(){
-     $this->middleware('auth');   
+    /*public function __construct(){
+     $this->middleware('guess');   
     }
 
 	
-	/**
+*/	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
@@ -47,6 +47,7 @@ class UserController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		dd($request);
         $rules = array(
             'email' => 'required|unique:users,email|email',
             'name' => 'required',

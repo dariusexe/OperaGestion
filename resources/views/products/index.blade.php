@@ -6,17 +6,25 @@
 
 @section ('table_panel_title','Lista de Clientes')
         @section ('table_panel_body')
-        @if (Session::has('message1'))
+        @if (Session::has('message'))
                     <div class="alert alert-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                     {{Session::get('message1')}}<b> {{Session::get('name')}} </b>{{Session::get('message2')}}
+                     {{Session::get('message')}}
                     </div>
-                @endif
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{Session::get('error')}}
+            </div>
+        @endif
 
         @include('widgets.ProductList', array('class'=>''))
-        @include('modal.sure')
+        @include('modal.sureProduct')
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'table'))
 
            
 @stop
+
+

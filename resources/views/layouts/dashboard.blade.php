@@ -58,13 +58,13 @@
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li >
-                            <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i>Comerciales<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*users') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('users') }}">Lista de usuarios</a>
+                                    <a href="{{ url ('users') }}">Lista de Comerciales</a>
                                 </li>
                                  <li {{ (Request::is('users/create') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('users/create') }}">Nuevo usuario</a>
+                                    <a href="{{ url ('users/create') }}">Nuevo comercial</a>
                                 </li>
                             </ul>
                         
@@ -89,6 +89,14 @@
                         </li>
                          <li {{ (Request::is('*products') ? 'class="active"' : '') }}>
                             <a href="{{ url ('products') }}"><i class="fa fa-archive fa-fw"></i> Productos</a>
+                             <ul class="nav nav-second-level">
+                                 <li {{ (Request::is('products/create') ? 'class="active"' : '') }}>
+                                     <a href="{{ url ('products/create') }}">Crear productos</a>
+                                 </li>
+                                 <li {{ (Request::is('products') ? 'class="active"' : '') }}>
+                                     <a href="{{ url ('products') }}">Ver productos</a>
+                                 </li>
+                             </ul>
                         </li>
                             
                 </div>

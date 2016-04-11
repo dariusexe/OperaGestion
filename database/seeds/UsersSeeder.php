@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert([
             'name'   => 'Darío',
             'lastName' => 'Vallejo Carrasco',
-            'tlf' => '655447312',
+            'phone' => '655447312',
             'role' => '7',
             'email'  => 'darioinfor@gmail.com',
             'password' => \Hash::make('nesi7yqyw3494')]);
@@ -28,7 +28,7 @@ class UsersSeeder extends Seeder
          DB::table('users')->insert([
             'name'   => $faker->firstName,
             'lastName' => $faker->lastName." ".$faker->lastName,
-            'tlf' => $faker->PhoneNumber,
+            'phone' => $faker->PhoneNumber,
             'role' => $faker->randomElement(['1','2','3','4','5','6','7']),
             'email'  => $faker->unique()->email,
             'password' => \Hash::make(12345),
