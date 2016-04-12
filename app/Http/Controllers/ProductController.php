@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 
+use App\ProductCompany;
 use Illuminate\Http\Request;
 use App\Product;
 use App\ProductClass;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+
+use PhpParser\Node\Scalar\MagicConst\File;
+use Storage;
 
 
 class ProductController extends Controller
@@ -37,8 +41,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $productsClass = ProductClass::all();
-        return view('products.create')->with('productsClass', $productsClass);
+        $company = ProductCompany::all();
+        $productClass = ProductClass::all();
+        return view('products.create')->with('company', $company)->with('productClass', $productClass);
     }
 
     /**
@@ -49,23 +54,30 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $rule = ['photo' => 'mimes:jpeg,bmp,png'];
+
+        $photo = $request->file('photo');
+        $ext = $photo->getClientOriginalExtension();
+        $name = str_random(16);
+        $this->validate($request, $rule);
+
+        Storage::disk('local')->put($name.'.'.$ext, \File::get($photo));
+
+        $product = new Product;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->class_id = $request->class_id;
+        $product->company_id = $request->company_id;
+        $product->url_photo =$name.'.'.$ext;
+        $product->save();
 
 
 
 
+        Session::flash('message', 'Se ha creado correctamente el producto');
 
 
-
-        $data = $request->all();
-
-
-
-        if (Product::create($data)){
-            Session::flash('message', 'Se ha creado correctamente el producto');
-        }
-        else{
-            Session::flash('error', 'No se ha podido crear el producto');
-        }
         return Redirect::to('/products');
 
     }
@@ -76,12 +88,12 @@ class ProductController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function show($id)
+    /*public function show($id)
     {
         $product = Product::find($id);
 
         return view('products.show')->with('product', $product);
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
@@ -135,5 +147,65 @@ class ProductController extends Controller
 
 
         return Redirect::to('/products');
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function classIndex(){
+
+        $productClass = ProductClass::all();
+        return view('products.indexClass')->with('data', $productClass);
+    }
+    public function companyIndex(){
+
+        $productCompany = ProductCompany::all();
+        return view('products.indexCompany')->with('data', $productCompany);
+    }
+
+    public function classCreate(){
+        return view('products.createClass');
+    }
+
+    public function companyCreate(){
+        return view('products.createCompany');
+    }
+
+    public function companyStore(Request $request){
+        $data = $request->all();
+        if (ProductCompany::create($data)){
+            Session::flash('message', 'Se ha creado correctamente la compañia');
+        }
+        else{
+            Session::flash('error', 'No se ha podido crear el producto');
+        }
+        return Redirect::to('/products/company');
+    }
+
+    public function classStore(Request $request){
+        $data = $request->all();
+        if (ProductClass::create($data)){
+            Session::flash('message', 'Se ha creado correctamente la Clase');
+        }
+        else{
+            Session::flash('error', 'No se ha podido crear el producto');
+        }
+        return Redirect::to('/products/class');
+    }
+    
+    public function classDestroy($id){
+        if (ProductClass::destroy($id)){
+            Session::flash('message', 'Se ha borrado correctamente la Clase');
+            return Redirect::to('/products/class');
+            
+        }
+    }
+    public function companyDestroy($id){
+        if (ProductCompany::destroy($id)){
+            Session::flash('message', 'Se ha borrado correctamente la Compañia');
+            return Redirect::to('/products/company');
+
+        }
     }
 }

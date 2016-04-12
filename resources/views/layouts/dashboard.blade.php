@@ -54,7 +54,7 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <li {{ (Request::is('home') ? 'class="active"' : '') }}>
+                        <li  {{ (Request::is('*users') ? 'class="active"' : '')}}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li >
@@ -63,20 +63,20 @@
                                 <li {{ (Request::is('*users') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('users') }}">Lista de Comerciales</a>
                                 </li>
-                                 <li {{ (Request::is('users/create') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('users/create') }}">Nuevo comercial</a>
+                                 <li {{ (Request::is('*users/create') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('users/create') }}">Nuevo Comercial</a>
                                 </li>
                             </ul>
                         
                             <!-- /.nav-second-level -->
                         </li>
                         <li {{ (Request::is('*clients') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('clients') }}"><i class="fa fa-users fa-fw"></i> Clientes</a>
+                            <a href="{{ url ('clients') }}"><i class="fa fa-users fa-fw"></i> Clientes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li {{ (Request::is('clients') ? 'class="active"' : '') }}>
+                                <li {{ (Request::is('*clients') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('clients') }}">Lista de Clientes</a>
                                 </li>
-                                 <li {{ (Request::is('clients/create') ? 'class="active"' : '') }}>
+                                 <li {{ (Request::is('*clients/create') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('clients/create') }}">Nuevo Cliente</a>
                                 </li>
                             </ul>
@@ -88,14 +88,24 @@
                             <a href="{{ url ('Contract') }}"><i class="fa fa-file-text fa-fw"></i> Contratos</a>
                         </li>
                          <li {{ (Request::is('*products') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('products') }}"><i class="fa fa-archive fa-fw"></i> Productos</a>
+                            <a href="{{ url ('products') }}"><i class="fa fa-archive fa-fw"></i> Productos<span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level">
-                                 <li {{ (Request::is('products/create') ? 'class="active"' : '') }}>
-                                     <a href="{{ url ('products/create') }}">Crear productos</a>
+                                 <li {{ (Request::is('*products/create') ? 'class="active"' : '') }}>
+                                     <a href="{{ url ('products/create') }}">Crear Productos</a>
                                  </li>
-                                 <li {{ (Request::is('products') ? 'class="active"' : '') }}>
-                                     <a href="{{ url ('products') }}">Ver productos</a>
+                                 <li {{ (Request::is('*products') ? 'class="active"' : '') }}>
+                                     <a href="{{ url ('products') }}">Ver Productos</a>
                                  </li>
+                                 <li {{ (Request::is('*products/class') ? 'class="active"' : '') }}>
+                                     <a href="{{ url ('products/class') }}">Ver Clases</a>
+                                 </li>
+                                 <li {{ (Request::is('*products/company') ? 'class="active"' : '') }}>
+                                     <a href="{{ url ('products/company') }}">Ver Compañias</a>
+                                 </li>
+
+
+
+
                              </ul>
                         </li>
                             

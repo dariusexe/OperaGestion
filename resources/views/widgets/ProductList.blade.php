@@ -1,6 +1,7 @@
 <table class="display table" id="list" style="width: 100%">
 	<thead>
 		<tr>
+			<th>Foto</th>
 			<th>Compañia</th>
 			<th>Nombre</th>
 			<th>Precio</th>
@@ -16,7 +17,8 @@
         @foreach($product as $data2)
 
 		<tr>
-            <td >{{$data2->company_id}}</td>
+			<td><img src="{{'/photo/'.$data2->url_photo}}" width="100px" height="100px"> </td>
+            <td>{{$data2->getCompany->name}}</td>
 			<td >{{$data2->name}}</td>
             <td>{{$data2->price.' €'}}</td>
 			<td>{{round($data2->price*1.21, 2).' €'}}</td>
