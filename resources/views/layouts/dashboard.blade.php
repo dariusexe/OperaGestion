@@ -1,7 +1,7 @@
 @extends('layouts.plane')
 
 @section('body')
- <div id="wrapper">
+    <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -12,21 +12,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('/home') }}"><img src="{{asset('assets/images/operagestion.png')}}"></a>
+                <a class="navbar-brand" href="{{ url ('/home') }}"><img
+                            src="{{asset('assets/images/operagestion.png')}}"></a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                
-                 <!-- /.dropdown-tasks -->
-             
+
+                <!-- /.dropdown-tasks -->
+
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        {{ Auth::user()->name }}<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        {{ Auth::user()->name }}<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{{route('users.edit', Auth::user()->id)}}"><i class="fa fa-user fa-fw"></i>Perfil</a>
+                        <li><a href="{{route('users.edit', Auth::user()->id)}}"><i
+                                        class="fa fa-user fa-fw"></i>Perfil</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i>Configuración</a>
                         </li>
@@ -54,61 +56,61 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <li  {{ (Request::is('*users') ? 'class="active"' : '')}}>
+                        <li {{ (Request::is('*users') ? 'class="active"' : '')}}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                        <li >
+                        <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i>Comerciales<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*users') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('users') }}">Lista de Comerciales</a>
                                 </li>
-                                 <li {{ (Request::is('*users/create') ? 'class="active"' : '') }}>
+                                <li {{ (Request::is('*users/create') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('users/create') }}">Nuevo Comercial</a>
                                 </li>
                             </ul>
-                        
+
                             <!-- /.nav-second-level -->
                         </li>
                         <li {{ (Request::is('*clients') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('clients') }}"><i class="fa fa-users fa-fw"></i> Clientes<span class="fa arrow"></span></a>
+                            <a href="{{ url ('clients') }}"><i class="fa fa-users fa-fw"></i> Clientes<span
+                                        class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*clients') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('clients') }}">Lista de Clientes</a>
                                 </li>
-                                 <li {{ (Request::is('*clients/create') ? 'class="active"' : '') }}>
+                                <li {{ (Request::is('*clients/create') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('clients/create') }}">Nuevo Cliente</a>
                                 </li>
                             </ul>
                         </li>
-                        <li {{ (Request::is('*presupuesto') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('presupuesto') }}"><i class="fa fa-file fa-fw"></i> Presupuestos</a>
+                        <li {{ (Request::is('*budget') ? 'class="active"' : '') }}>
+                            <a href="{{ route ('budgets.index') }}"><i class="fa fa-file fa-fw"></i> Presupuestos</a>
                         </li>
-                         <li {{ (Request::is('*Contract') ? 'class="active"' : '') }}>
+                        <li {{ (Request::is('*Contract') ? 'class="active"' : '') }}>
                             <a href="{{ url ('Contract') }}"><i class="fa fa-file-text fa-fw"></i> Contratos</a>
                         </li>
-                         <li {{ (Request::is('*products') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('products') }}"><i class="fa fa-archive fa-fw"></i> Productos<span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level">
-                                 <li {{ (Request::is('*products/create') ? 'class="active"' : '') }}>
-                                     <a href="{{ url ('products/create') }}">Crear Productos</a>
-                                 </li>
-                                 <li {{ (Request::is('*products') ? 'class="active"' : '') }}>
-                                     <a href="{{ url ('products') }}">Ver Productos</a>
-                                 </li>
-                                 <li {{ (Request::is('*products/class') ? 'class="active"' : '') }}>
-                                     <a href="{{ url ('products/class') }}">Ver Clases</a>
-                                 </li>
-                                 <li {{ (Request::is('*products/company') ? 'class="active"' : '') }}>
-                                     <a href="{{ url ('products/company') }}">Ver Compañias</a>
-                                 </li>
+                        <li {{ (Request::is('*products') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('products') }}"><i class="fa fa-archive fa-fw"></i> Productos<span
+                                        class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li {{ (Request::is('*products/create') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('products/create') }}">Crear Productos</a>
+                                </li>
+                                <li {{ (Request::is('*products') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('products') }}">Ver Productos</a>
+                                </li>
+                                <li {{ (Request::is('*products/class') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('products/class') }}">Ver Clases</a>
+                                </li>
+                                <li {{ (Request::is('*products/company') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('products/company') }}">Ver Compañias</a>
+                                </li>
 
 
-
-
-                             </ul>
+                            </ul>
                         </li>
-                            
+
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
@@ -116,14 +118,14 @@
         </nav>
 
         <div id="page-wrapper">
-			 <div class="row">
+            <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">@yield('page_heading')</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-           </div>
-			<div class="row">  
-				@yield('section')
+            </div>
+            <div class="row">
+                @yield('section')
 
             </div>
             <!-- /#page-wrapper -->

@@ -1,23 +1,23 @@
 @extends('layouts.dashboard')
 @section('page_heading','Usuarios')
 @section('section')
-         
+
 
 
 @section ('table_panel_title','Lista de Usuarios')
-		@section ('table_panel_body')
-		@if (Session::has('message1'))
-                    <div class="alert alert-success">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                     {{Session::get('message1')}}<b> {{Session::get('name')}} </b>
-                     {{Session::get('message2')}}
-                    </div>
-                @endif
-		@include('widgets.list', array('class'=>''))
-        @include('modal.sure')
-		@endsection
-		@include('widgets.panel', array('header'=>true, 'as'=>'table'))
+@section ('table_panel_body')
+    @if (Session::has('message1'))
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{Session::get('message1')}}<b> {{Session::get('name')}} </b>
+            {{Session::get('message2')}}
+        </div>
+    @endif
+    @include('widgets.list', array('class'=>''))
+    @include('modal.sure')
+@endsection
+@include('widgets.panel', array('header'=>true, 'as'=>'table'))
 
-           
+
 @stop
 

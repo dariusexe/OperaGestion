@@ -54,25 +54,34 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $rule = ['photo' => 'mimes:jpeg,bmp,png'];
-
-        $photo = $request->file('photo');
-        $ext = $photo->getClientOriginalExtension();
-        $name = str_random(16);
+        $rule = ['photo' => 'mimes:jpeg,bmp,png',
+            'price' => 'numeric',
+            'name' => 'required',
+            'class_id' => 'required',
+            'company_id' => 'required',
+            'type' => 'enum:1,2,3'];
         $this->validate($request, $rule);
-
-        Storage::disk('local')->put($name.'.'.$ext, \File::get($photo));
-
         $product = new Product;
+        if (!empty($request->photo)) {
+            $photo = $request->file('photo');
+            $ext = $photo->getClientOriginalExtension();
+            $name = str_random(16);
+
+            while (Storage::disk('local')->has($name)) {
+                $name = str_random(16);
+            }
+            Storage::disk('local')->put($name . '.' . $ext, \File::get($photo));
+            $product->url_photo = $name . '.' . $ext;
+        }
+
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->class_id = $request->class_id;
         $product->company_id = $request->company_id;
-        $product->url_photo =$name.'.'.$ext;
+        $product->type = $request->type;
+
         $product->save();
-
-
 
 
         Session::flash('message', 'Se ha creado correctamente el producto');
@@ -103,8 +112,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $company = ProductCompany::all();
+        $productClass = ProductClass::all();
         $product = Product::find($id);
-        return view('products.edit')->with('product', $product);
+        return view('products.edit')->with('product', $product)->with('company', $company)->with('productClass', $productClass);
     }
 
     /**
@@ -117,17 +128,34 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $rules2 = array();
-        $data = $request->all();
         $this->validate($request, $rules2);
-        $product->fill($data);
+        if (!empty($request->photo)) {
+            $photo = $request->file('photo');
+            $ext = $photo->getClientOriginalExtension();
+            $name = str_random(16);
+
+            while (Storage::disk('local')->has($name)) {
+                $name = str_random(16);
+            }
+            Storage::disk('local')->put($name . '.' . $ext, \File::get($photo));
+            $product->url_photo = $name . '.' . $ext;
+        }
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->class_id = $request->class_id;
+        $product->company_id = $request->company_id;
+        $product->type = $request->type;
+
         $product->save();
+
 
         Session::flash('message1', 'El producto');
         Session::flash('message2', 'se ha modificado correctamente');
-        Session::flash('name', $data['name']);
+        Session::flash('name', $request->name);
 
 
-        return Redirect::to('/clients');
+        return Redirect::to('/products');
     }
 
     /**
@@ -153,59 +181,89 @@ class ProductController extends Controller
     /**
      * @return mixed
      */
-    public function classIndex(){
+    public function classIndex()
+    {
 
         $productClass = ProductClass::all();
         return view('products.indexClass')->with('data', $productClass);
     }
-    public function companyIndex(){
+
+    public function companyIndex()
+    {
 
         $productCompany = ProductCompany::all();
         return view('products.indexCompany')->with('data', $productCompany);
     }
 
-    public function classCreate(){
+    public function classCreate()
+    {
         return view('products.createClass');
     }
 
-    public function companyCreate(){
+    public function companyCreate()
+    {
         return view('products.createCompany');
     }
 
-    public function companyStore(Request $request){
+    public function companyStore(Request $request)
+    {
         $data = $request->all();
-        if (ProductCompany::create($data)){
+        if (ProductCompany::create($data)) {
             Session::flash('message', 'Se ha creado correctamente la compañia');
-        }
-        else{
+        } else {
             Session::flash('error', 'No se ha podido crear el producto');
         }
         return Redirect::to('/products/company');
     }
 
-    public function classStore(Request $request){
+    public function classStore(Request $request)
+    {
         $data = $request->all();
-        if (ProductClass::create($data)){
+        if (ProductClass::create($data)) {
             Session::flash('message', 'Se ha creado correctamente la Clase');
-        }
-        else{
+        } else {
             Session::flash('error', 'No se ha podido crear el producto');
         }
         return Redirect::to('/products/class');
     }
-    
-    public function classDestroy($id){
-        if (ProductClass::destroy($id)){
-            Session::flash('message', 'Se ha borrado correctamente la Clase');
-            return Redirect::to('/products/class');
-            
-        }
-    }
-    public function companyDestroy($id){
-        if (ProductCompany::destroy($id)){
-            Session::flash('message', 'Se ha borrado correctamente la Compañia');
-            return Redirect::to('/products/company');
+
+    public function classDestroy($id)
+    {
+        $product = Product::all();
+
+
+        foreach ($product as $item) {
+            if ($item->class_id == $id) {
+                Session::flash('error', 'Asegurese de cambiar o borrar el producto asociado a esta clase');
+                return Redirect::to('/products/class');
+            }
+
 
         }
+
+        ProductClass::destroy($id);
+        Session::flash('message', 'Se ha borrado correctamente la Clase');
+        return Redirect::to('/products/class');
+    }
+
+    public function companyDestroy($id)
+    {
+
+        $product = Product::all();
+
+
+        foreach ($product as $item) {
+            if ($item->company_id == $id) {
+                Session::flash('error', 'Asegurese de cambiar o borrar el producto asociado a esta clase');
+                return Redirect::to('/products/company');
+            }
+        }
+
+
+        ProductCompany::destroy($id);
+        Session::flash('message', 'Se ha borrado correctamente la Compañia');
+        return Redirect::to('/products/company');
+
+
     }
 }

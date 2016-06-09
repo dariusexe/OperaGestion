@@ -10,30 +10,34 @@ class UsersSeeder extends Seeder
      * @return void
      */
     public function run()
-	{
-        
-        DB::table('users')->insert([
-            'name'   => 'Darío',
-            'lastName' => 'Vallejo Carrasco',
-            'phone' => '655447312',
-            'role' => '7',
-            'email'  => 'darioinfor@gmail.com',
-            'password' => \Hash::make('nesi7yqyw3494')]);
+    {
 
-        
+        DB::table('users')->insert([
+            'name' => 'Usuario',
+            'lastName' => 'Prueba',
+            'phone' => '123456789',
+            'email' => 'prueba@prueba.com',
+            'password' => \Hash::make('12345')]);
+
+
         $faker = Faker\Factory::create('es_ES');
-        
-        for ($i=0; $i < 50; $i++){
-        
-         DB::table('users')->insert([
-            'name'   => $faker->firstName,
-            'lastName' => $faker->lastName." ".$faker->lastName,
-            'phone' => $faker->PhoneNumber,
-            'role' => $faker->randomElement(['1','2','3','4','5','6','7']),
-            'email'  => $faker->unique()->email,
-            'password' => \Hash::make(12345),
+
+        for ($i = 0; $i < 50; $i++) {
+
+            DB::table('users')->insert([
+                'name' => $faker->firstName,
+                'lastName' => $faker->lastName . " " . $faker->lastName,
+                'phone' => $faker->PhoneNumber,
+                'identification' => $faker->bothify('#########?'),
+                'country' => $faker->community,
+                'city' => $faker->city,
+                'address' => $faker->address,
+                'PC' => $faker->postcode,
+                'IBAN' => $faker->iban('ES'),
+                'email' => $faker->unique()->email,
+                'password' => \Hash::make(12345),
             ]);
-            
+
         }
     }
 }

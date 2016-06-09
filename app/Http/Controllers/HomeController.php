@@ -1,36 +1,40 @@
 <?php namespace App\Http\Controllers;
 
-class HomeController extends Controller {
+use App\Client;
 
-	/*
-	|--------------------------------------------------------------------------
-	| Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders your application's "dashboard" for users that
-	| are authenticated. Of course, you are free to change or remove the
-	| controller as you wish. It is just here to get your app started!
-	|
-	*/
+class HomeController extends Controller
+{
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		$this->middleware('auth');
-	}
+    /*
+    |--------------------------------------------------------------------------
+    | Home Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller renders your application's "dashboard" for users that
+    | are authenticated. Of course, you are free to change or remove the
+    | controller as you wish. It is just here to get your app started!
+    |
+    */
 
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		return view('home');
-	}
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard to the user.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $clients = Client::all();
+        return view('home')->with('clients', $clients);
+    }
 
 }

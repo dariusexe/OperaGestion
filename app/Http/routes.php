@@ -12,11 +12,6 @@
 */
 
 
-
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -28,52 +23,44 @@
 |
 */
 
-Route::get('panel', function(){
+Route::get('panel', function () {
     return View::make('panel');
 });
 
 Route::group(['middleware' => 'web'], function () {
 
 
-Route::auth();
+    Route::auth();
 
-Route::resource('users', 'UserController');
+    Route::resource('users', 'UserController');
 
-Route::resource('clients', 'ClientController');
+    Route::resource('clients', 'ClientController');
 
-Route::post('products/company/create', 'ProductController@companyStore');
-Route::post('products/class/create', 'ProductController@classStore');
-Route::get('products/company/create', 'ProductController@companyCreate');
+    Route::post('products/company/create', 'ProductController@companyStore');
+    Route::post('products/class/create', 'ProductController@classStore');
+    Route::get('products/company/create', 'ProductController@companyCreate');
     Route::get('products/class/create', 'ProductController@classCreate');
 
-Route::get('products/class', ['as' => 'ProductClass', 'uses' =>'ProductController@classIndex']);
-Route::get('products/company', ['as' => 'ProductCompany', 'uses' =>'ProductController@companyIndex']);
-Route::delete('products/class/{id}', 'ProductController@classDestroy');
-Route::delete('products/company/{id}', 'ProductController@companyDestroy');
+    Route::get('products/class', ['as' => 'ProductClass', 'uses' => 'ProductController@classIndex']);
+    Route::get('products/company', ['as' => 'ProductCompany', 'uses' => 'ProductController@companyIndex']);
+    Route::delete('products/class/{id}', 'ProductController@classDestroy');
+    Route::delete('products/company/{id}', 'ProductController@companyDestroy');
 
 
+    Route::resource('products', 'ProductController');
 
-Route::resource('products', 'ProductController');
 
-
-    Route::get('Contract', function(){
+    Route::get('Contract', function () {
         return View::make('building');
     });
 
-    Route::get('presupuesto', function(){
-        return View::make('building');
-    });
 
-    
+    Route::get('/', 'LoginController@index');
 
-    
-    
-    
-    
-    
-Route::get('/', 'LoginController@index');
+    Route::get("home", 'HomeController@index');
 
-Route::get("home", 'HomeController@index');
+    Route::get('test', 'ProductController@test');
 
-Route::get('test', 'ProductController@test');
+
+    Route::resource('budgets', 'BudgetController');
 });

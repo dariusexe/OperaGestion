@@ -26,15 +26,15 @@
                     </div>
                     <div class="form-group">
                         <label>E-mail</label>
-                        <input class="form-control"  name="email">
+                        <input class="form-control" name="email">
                     </div>
                     <div class="form-group">
                         <label>Representante Legal</label>
-                        <input class="form-control"  name="legalPartner">
+                        <input class="form-control" name="legalPartner">
                     </div>
                     <div class="form-group">
                         <label>CIF/NIF Representante Legal</label>
-                        <input class="form-control"  name="CIFLegalPartner">
+                        <input class="form-control" name="CIFLegalPartner">
                     </div>
 
 

@@ -20,6 +20,12 @@
 <body>
 	@yield('body')
 	<script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
+	<script type="text/javascript" src="{{ asset('assets/scripts/jquery.bootstrap.wizard.js') }}" ></script>
+	<script>
+		$(document).ready(function() {
+			$('#rootwizard').bootstrapWizard();
+		});
+	</script>
     <script type="text/javascript">
 $('#sure').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);// Button that triggered the modal
@@ -130,7 +136,7 @@ $('#sure').on('show.bs.modal', function (event) {
 			})
 			.mouseout(function(){
 				$(this).css('background-color','white')
-			})
+			});
 
 	$('tbody tr #link').on("click", function() {
 		if($(this).attr('href') !== undefined){
@@ -142,11 +148,10 @@ $('#sure').on('show.bs.modal', function (event) {
 	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#list').dataTable( {
+			$('table.display').DataTable( {
 				"language": {
 					"url": "http://cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
-				},
-				dataLenght: false
+				}
 			} );
 		} );
 	</script>
@@ -179,5 +184,22 @@ $('#sure').on('show.bs.modal', function (event) {
 
 </script>
 
+<script type="text/javascript">
+	$('#clients').on('show.bs.modal');
+	$('tr').on("click", function() {
+
+		id = $(this).data('id');
+		name = $(this).data('name');
+		$('#clientInput').val(id);
+		$('#selection').attr('class', 'alert alert-info').html('Cliente selecionado : <strong>'+name+'</strong>');
+		$('#change').html('Cambiar');
+		$('#clients').modal('hide');
+
+
+
+
+	});
+	$('#products').on('show.bs.modal')
+</script>
 </body>
 </html>

@@ -8,7 +8,7 @@ class ProductCompany extends Model
 {
     protected $table = 'products_company';
     protected $fillable = ['name'];
-    
+    public $timestamps = false;
 
- 
+
 }

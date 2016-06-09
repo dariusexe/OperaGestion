@@ -19,7 +19,15 @@
 
             <div class="form-group">
                 <label>Precio</label>
-                <input class="form-control" name="price">
+                <input class="form-control" name="price" placeholder="Los precios se ponen con punto">
+            </div>
+            <div class="form-group">
+                <label>Tipo</label>
+                <select class="form-control" name="type">
+                    <option value="1">Resindecial</option>
+                    <option value="2">Micropymes</option>
+                    <option value="3">Pymes</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Clase</label>
